@@ -6,7 +6,6 @@ const WeatherSearch = () => {
   const [city, setCity] = useState('');
   const [weatherData, setWeatherData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
 
   const apiKey = '7ad2425e5186449e865173835242803';
 
