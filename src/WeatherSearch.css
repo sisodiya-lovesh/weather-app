@@ -36,13 +36,13 @@
   }
   
   .weather-card {
-    border: 1px solid #ddd;
-    padding: 20px;
-    margin: 10px;
+    background: #fff;
     border-radius: 5px;
-    width: 200px;
-    background-color: white;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin: 0 10px;
+    padding: 20px;
+    text-align: center;
+    width: 150px;
   }
   
   .weather-card h2 {
@@ -54,8 +54,14 @@
     font-size: 18px;
   }
   
-  .loading, .error {
-    margin-top: 20px;
-    font-size: 18px;
+  .loading {
+    color: #000;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  
+  .weather-app {
+    text-align: center;
+    font-family: Arial, sans-serif;
   }
   

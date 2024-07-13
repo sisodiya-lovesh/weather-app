@@ -10,6 +10,7 @@ const WeatherSearch = () => {
   const apiKey = '7ad2425e5186449e865173835242803';
 
   const fetchWeatherData = async () => {
+    console.log('Fetching weather data...');
     setLoading(true);
     setWeatherData(null);
     try {
@@ -21,6 +22,7 @@ const WeatherSearch = () => {
      alert('Failed to fetch weather data');
     }
     setLoading(false);
+    console.log('Finished fetching weather data');
   };
 
   return (
@@ -36,16 +38,16 @@ const WeatherSearch = () => {
       {weatherData && (
         <div className="weather-cards">
           <div className="weather-card">
-            <p><strong>Temperature</strong><br />{weatherData.current.temp_c}°C</p>
+            <div><strong>Temperature</strong><br />{weatherData.current.temp_c}°C</div>
           </div>
           <div className="weather-card">
-            <p><strong>Humidity</strong><br />{weatherData.current.humidity}%</p>
+            <div><strong>Humidity</strong><br />{weatherData.current.humidity}%</div>
           </div>
           <div className="weather-card">
-            <p><strong>Condition</strong><br />{weatherData.current.condition.text}</p>
+            <div><strong>Condition</strong><br />{weatherData.current.condition.text}</div>
           </div>
           <div className="weather-card">
-            <p><strong>Wind Speed</strong><br />{weatherData.current.wind_kph} kph</p>
+            <div><strong>Wind Speed</strong><br />{weatherData.current.wind_kph} kph</div>
           </div>
         </div>
       )}
