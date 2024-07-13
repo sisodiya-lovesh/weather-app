@@ -5,13 +5,15 @@ import './WeatherSearch.css';
 const WeatherSearch = () => {
   const [city, setCity] = useState('');
   const [weatherData, setWeatherData] = useState(null);
-  const [loading, setLoading] = useState(false);
 
   const apiKey = '7ad2425e5186449e865173835242803';
 
   const fetchWeatherData = async () => {
-    console.log('Fetching weather data...');
-    setLoading(true);
+    const loadingElement = document.querySelector('.loading');
+    if (loadingElement) {
+      loadingElement.style.display = 'block'; // Show loading indicator
+    }
+
     setWeatherData(null);
     try {
       const response = await axios.get(
@@ -19,10 +21,12 @@ const WeatherSearch = () => {
       );
       setWeatherData(response.data);
     } catch (error) {
-     alert('Failed to fetch weather data');
+      alert('Failed to fetch weather data');
+    } finally {
+      if (loadingElement) {
+        loadingElement.style.display = 'none'; // Hide loading indicator
+      }
     }
-    setLoading(false);
-    console.log('Finished fetching weather data');
   };
 
   return (
@@ -34,7 +38,7 @@ const WeatherSearch = () => {
         placeholder="Enter city name"
       />
       <button onClick={fetchWeatherData}>Search</button>
-      {loading && <p className="loading">Loading data…</p>}
+      <p className="loading" style={{ display: 'none' }}>Loading data…</p>
       {weatherData && (
         <div className="weather-cards">
           <div className="weather-card">
