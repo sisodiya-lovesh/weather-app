@@ -1,0 +1,62 @@
+.weather-app {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff; /* Light blue background */
+    padding: 20px;
+    height: 100vh;
+  }
+  
+  input {
+    padding: 10px;
+    margin-right: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 200px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    border: none;
+  }
+  
+  button:hover {
+    background-color: #45a049; /* Darker green on hover */
+  }
+  
+  .weather-cards {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .weather-card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 5px;
+    width: 200px;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  }
+  
+  .weather-card h2 {
+    margin-top: 0;
+  }
+  
+  .weather-card p {
+    margin: 5px 0;
+    font-size: 18px;
+  }
+  
+  .loading, .error {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #ff0000; /* Red color for errors */
+  }
+  
