@@ -10,13 +10,7 @@ const WeatherSearch = () => {
   const apiKey = '7ad2425e5186449e865173835242803';
 
   const fetchWeatherData = async () => {
-    if (!city) {
-      setError('Please enter a city name');
-      return;
-    }
-
     setLoading(true);
-    setError('');
     setWeatherData(null);
     try {
       const response = await axios.get(
