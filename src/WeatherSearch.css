@@ -57,6 +57,5 @@
   .loading, .error {
     margin-top: 20px;
     font-size: 18px;
-    color: #ff0000; /* Red color for errors */
   }
   

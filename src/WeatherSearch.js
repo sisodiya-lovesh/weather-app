@@ -18,6 +18,7 @@ const WeatherSearch = () => {
 
     setLoading(true);
     setError('');
+    setWeatherData(null);
     try {
       const response = await axios.get(
         `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`
@@ -31,7 +32,6 @@ const WeatherSearch = () => {
 
   return (
     <div className="weather-app">
-      <h1>Weather Application</h1>
       <input
         type="text"
         value={city}
