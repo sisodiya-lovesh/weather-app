@@ -22,10 +22,6 @@ const WeatherSearch = () => {
       setWeatherData(response.data);
     } catch (error) {
       alert('Failed to fetch weather data');
-    } finally {
-      if (loadingElement) {
-        loadingElement.style.display = 'none'; // Hide loading indicator
-      }
     }
   };
 
