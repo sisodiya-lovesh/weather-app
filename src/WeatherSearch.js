@@ -1,58 +1,87 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import './WeatherSearch.css';
+import { useEffect, useState } from "react";
+import axios from "axios";
+import "./WeatherSearch.css";
 
-const WeatherSearch = () => {
-  const [city, setCity] = useState('');
-  const [weatherData, setWeatherData] = useState(null);
-
-  const apiKey = '7ad2425e5186449e865173835242803';
-
-  const fetchWeatherData = async () => {
-    const loadingElement = document.querySelector('.loading');
-    if (loadingElement) {
-      loadingElement.style.display = 'block'; // Show loading indicator
-    }
-
-    setWeatherData(null);
-    try {
-      const response = await axios.get(
-        `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`
-      );
-      setWeatherData(response.data);
-    } catch (error) {
-      alert('Failed to fetch weather data');
-    }
+const SearchBar = ({ onSearch }) => {
+  const [searchValue, setSearchValue] = useState("");
+  const handleSearch = () => {
+    onSearch(searchValue);
   };
 
   return (
-    <div className="weather-app">
+    <div className="search-bar">
       <input
-        type="text"
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
         placeholder="Enter city name"
+        type="text"
+        value={searchValue}
+        onChange={(event) => setSearchValue(event.target.value)}
       />
-      <button onClick={fetchWeatherData}>Search</button>
-      <p className="loading" style={{ display: 'none' }}>Loading data…</p>
-      {weatherData && (
+      <button onClick={handleSearch}>Search</button>
+    </div>
+  );
+};
+
+const WeatherCard = ({ title, value }) => {
+  return (
+    <div className="weather-card">
+      <h3>{title}</h3>
+      <p>{value}</p>
+    </div>
+  );
+};
+
+const WeatherDisplay = ({ city }) => {
+  const [weatherData, setWeatherData] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (city) {
+      setLoading(true);
+      axios
+        .get(`https://api.weatherapi.com/v1/current.json`, {
+          params: {
+            key: "7ad2425e5186449e865173835242803",
+            q: city,
+          },
+        })
+        .then((response) => {
+          setWeatherData(response.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching data", error);
+          alert("Failed to fetch weather data");
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
+  }, [city]);
+
+  return (
+    <div className="weather-display">
+      {loading && <p>Loading data...</p>}
+      {!loading && weatherData && (
         <div className="weather-cards">
-          <div className="weather-card">
-            <div><strong>Temperature</strong><br />{weatherData.current.temp_c}°C</div>
-          </div>
-          <div className="weather-card">
-            <div><strong>Humidity</strong><br />{weatherData.current.humidity}%</div>
-          </div>
-          <div className="weather-card">
-            <div><strong>Condition</strong><br />{weatherData.current.condition.text}</div>
-          </div>
-          <div className="weather-card">
-            <div><strong>Wind Speed</strong><br />{weatherData.current.wind_kph} kph</div>
-          </div>
+          <WeatherCard
+            title="Temperature"
+            value={`${weatherData.current.temp_c}°C`}
+          />
+          <WeatherCard
+            title="Humidity"
+            value={`${weatherData.current.humidity}%`}
+          />
+          <WeatherCard
+            title="Condition"
+            value={`${weatherData.current.condition.text}`}
+          />
+          <WeatherCard
+            title="Wind Speed"
+            value={`${weatherData.current.wind_kph} kph`}
+          />
         </div>
       )}
     </div>
   );
 };
 
-export default WeatherSearch;
+export { SearchBar, WeatherDisplay };
